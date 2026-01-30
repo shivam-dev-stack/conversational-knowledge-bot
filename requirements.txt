@@ -1,0 +1,8 @@
+langchain
+langchain-community
+duckduckgo-search
+transformers
+torch
+sentencepiece
+streamlit
+python-dotenv
