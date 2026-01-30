@@ -22,7 +22,7 @@ Built without OpenAI or Ollama — fully CPU-based.
 
 ---
 
-## 🏗 Architecture
+##  Architecture
 
 ```bash
 User
@@ -39,7 +39,7 @@ Entity Memory (for follow-ups)
 
 ```
 
-Tech Stack
+# Tech Stack
 
 Python 3.10+
 
@@ -51,30 +51,36 @@ DuckDuckGo Search (ddgs)
 
 Streamlit
 
-Installation
+# Installation
 
-Create environment:
-
+## Create environment:
+```bash
 conda create -n kbot python=3.10
 conda activate kbot
+```
 
 
-Install dependencies:
-
+## Install dependencies:
+```bash
 pip install transformers torch streamlit ddgs
+```
 
 Run CLI
+```bash
 python cli.py
+```
 
 Run Streamlit UI
+```bash
 streamlit run app.py
-
+```
 
 Open in browser:
 
 http://localhost:8501
 
-💬 Sample Chat
+### Sample Chat
+```bash
 User: who is ceo of tesla
 Bot: Elon Musk
 
@@ -83,4 +89,5 @@ Bot: University of Pennsylvania
 
 User: where was he born
 Bot: Pretoria
+```
 
