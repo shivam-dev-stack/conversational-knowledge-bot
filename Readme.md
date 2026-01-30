@@ -1,54 +1,86 @@
-# Conversational Knowledge Bot
+#  Conversational Knowledge Bot
 
-LangChain-powered chatbot with memory + web search.
+A locally deployable Conversational Knowledge Bot that supports contextual follow-up questions by combining:
 
-## Features
+- External web search (DuckDuckGo)
+- Extractive Question Answering (RoBERTa)
+- Lightweight conversational memory
+- Streamlit chat UI
 
-- Conversational memory
-- DuckDuckGo web search
-- Contextual follow-up questions
-- CLI + Streamlit UI
+Built without OpenAI or Ollama — fully CPU-based.
 
-## Tech Stack
+---
 
-- Python
-- LangChain
-- OpenAI
-- DuckDuckGo Search
-- Streamlit
+##  Features
 
+-  Searches live web data using DuckDuckGo  
+-  Extracts factual answers using HuggingFace QA model  
+-  Remembers previous entity for follow-up questions (e.g., “Where did he study?”)  
+-  Streamlit chat interface  
+-  CLI support  
+-  No paid APIs required  
 
-User → CLI
-     → DuckDuckGo Search
-     → QA Model (RoBERTa)
-     → Answer Extraction
-     → Conversation Memory (entity carryover)
+---
 
-## Setup
+## 🏗 Architecture
 
 ```bash
-git clone repo
-cd conversational-bot
-pip install -r requirements.txt
+User
+ ↓
+Streamlit / CLI
+ ↓
+DuckDuckGo Search (DDGS)
+ ↓
+RoBERTa Question Answering Model
+ ↓
+Answer Extraction
+ ↓
+Entity Memory (for follow-ups)
+
+```
+
+Tech Stack
+
+Python 3.10+
+
+HuggingFace Transformers
+
+deepset/roberta-base-squad2 (QA Model)
+
+DuckDuckGo Search (ddgs)
+
+Streamlit
+
+Installation
+
+Create environment:
+
+conda create -n kbot python=3.10
+conda activate kbot
+
+
+Install dependencies:
+
+pip install transformers torch streamlit ddgs
 
 Run CLI
-
 python cli.py
 
-Run UI
-
+Run Streamlit UI
 streamlit run app.py
 
-Memory Design
 
-ConversationBufferMemory stores chat history and injects into agent.
+Open in browser:
 
-Tools
+http://localhost:8501
 
-DuckDuckGoSearchRun for factual queries.
+💬 Sample Chat
+User: who is ceo of tesla
+Bot: Elon Musk
 
-Example
+User: where did he study
+Bot: University of Pennsylvania
 
-Who is CEO of OpenAI?
-Where did he study?
+User: where was he born
+Bot: Pretoria
 

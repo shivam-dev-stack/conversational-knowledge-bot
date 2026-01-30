@@ -30,9 +30,19 @@ class KnowledgeBot:
 
         context = " ".join([r["body"] for r in results])
 
-        answer = self.qa(
-            question=question,
-            context=context
-        )
 
-        return answer["answer"]
+
+        answer = self.qa(
+            question=full_question,
+            context=context
+        )["answer"]
+
+        if not answer:
+            return "Sorry — I couldn't extract a clean answer. Please try rephrasing."
+
+        answer = answer.strip()
+
+        if len(answer) < 3 or "and more" in answer.lower():
+            return "Sorry — I couldn't extract a clean answer. Please try rephrasing."
+
+        return answer
