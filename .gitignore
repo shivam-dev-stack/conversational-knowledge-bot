@@ -1,0 +1,21 @@
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.json
+
+# Virtual env
+env/
+venv/
+.venv/
+kbot/
+
+# OS
+.DS_Store
+
+# HuggingFace cache
+.cache/
+
+

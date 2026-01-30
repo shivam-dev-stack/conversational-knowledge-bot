@@ -1,35 +1,38 @@
-from langchain.agents import initialize_agent, AgentType
-from langchain.memory import ConversationBufferMemory
-from langchain_community.tools import DuckDuckGoSearchRun
-from langchain_community.llms import HuggingFacePipeline
-
 from transformers import pipeline
+from ddgs import DDGS
 
-def create_agent():
+class KnowledgeBot:
 
-    pipe = pipeline(
-        "text2text-generation",
-        model="google/flan-t5-base",
-        max_length=512
-    )
+    def __init__(self):
 
-    llm = HuggingFacePipeline(pipeline=pipe)
+        # Question Answering model (CPU friendly)
+        self.qa = pipeline(
+            "question-answering",
+            model="deepset/roberta-base-squad2"
+        )
 
-    search = DuckDuckGoSearchRun()
+        self.search = DDGS()
+        self.history = []
 
-    tools = [search]
+    def ask(self, question):
 
-    memory = ConversationBufferMemory(
-        memory_key="chat_history",
-        return_messages=True
-    )
+        if self.history:
+            full_question = f"{self.history[-1]} {question}"
+        else:
+            full_question = question
 
-    agent = initialize_agent(
-        tools,
-        llm,
-        agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
-        memory=memory,
-        verbose=True
-    )
+        self.history.append(full_question)
 
-    return agent
+        results = list(self.search.text(full_question, max_results=5))
+
+        if not results:
+            return "No search results found."
+
+        context = " ".join([r["body"] for r in results])
+
+        answer = self.qa(
+            question=question,
+            context=context
+        )
+
+        return answer["answer"]

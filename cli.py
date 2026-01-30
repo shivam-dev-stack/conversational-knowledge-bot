@@ -1,14 +1,12 @@
-from agent import create_agent
+from agent import KnowledgeBot
 
-agent = create_agent()
-
-print("Conversational Knowledge Bot (type 'exit')")
+bot = KnowledgeBot()
 
 while True:
-    user_input = input("\nYou: ")
+    q = input("\nYou: ")
 
-    if user_input.lower() == "exit":
+    if q == "exit":
         break
 
-    response = agent.run(user_input)
-    print("\nBot:", response)
+    ans = bot.ask(q)
+    print("\nBot:", ans)

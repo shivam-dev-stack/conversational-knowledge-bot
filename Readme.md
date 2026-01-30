@@ -17,6 +17,13 @@ LangChain-powered chatbot with memory + web search.
 - DuckDuckGo Search
 - Streamlit
 
+
+User → CLI
+     → DuckDuckGo Search
+     → QA Model (RoBERTa)
+     → Answer Extraction
+     → Conversation Memory (entity carryover)
+
 ## Setup
 
 ```bash
@@ -44,3 +51,4 @@ Example
 
 Who is CEO of OpenAI?
 Where did he study?
+
