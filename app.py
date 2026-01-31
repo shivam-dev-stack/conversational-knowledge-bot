@@ -1,7 +1,11 @@
 import streamlit as st
 from agent import KnowledgeBot
 
-st.title("🧠 Conversational Knowledge Bot")
+'''
+Simple Streamlit app for the Conversational Knowledge Bot.
+'''
+
+st.title("Conversational Knowledge Bot")
 
 # Initialize bot once
 if "bot" not in st.session_state:
