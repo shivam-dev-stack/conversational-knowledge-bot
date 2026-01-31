@@ -1,7 +1,5 @@
 #  Conversational Knowledge Bot
 
-A locally deployable Conversational Knowledge Bot that supports contextual follow-up questions by combining:
-
 - External web search (DuckDuckGo)
 - Extractive Question Answering (RoBERTa)
 - Lightweight conversational memory
